@@ -43,6 +43,12 @@ router.post(
             price,
             roomNumber,
         });
+        const isRoom = await Room.findOne({roomNumber:roomNumber})
+        if(isRoom)
+        {
+          return res.status(400).json("Room Number is already Taken, Please select another Room Number");
+        }
+
         await room.save();
         res.json(room);
       } catch (err) {
